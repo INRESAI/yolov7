@@ -178,7 +178,7 @@ class LoadImages:  # for inference
                     ret_val, img0 = self.cap.read()
 
             self.frame += 1
-            print(f'video {self.count + 1}/{self.nf} ({self.frame}/{self.nframes}) {path}: ', end='')
+            # print(f'video {self.count + 1}/{self.nf} ({self.frame}/{self.nframes}) {path}: ', end='')
 
         else:
             # Read image
@@ -306,15 +306,15 @@ class LoadStreams:  # multiple IP or RTSP cameras
 
     def update(self, index, cap):
         # Read next stream frame in a daemon thread
-        n = 0
+        # n = 0
         while cap.isOpened():
-            n += 1
+            # n += 1
             # _, self.imgs[index] = cap.read()
             cap.grab()
-            if n == 4:  # read every 4th frame
-                success, im = cap.retrieve()
-                self.imgs[index] = im if success else self.imgs[index] * 0
-                n = 0
+            # if n == 4:  # read every 4th frame
+            success, im = cap.retrieve()
+            self.imgs[index] = im if success else self.imgs[index] * 0
+                # n = 0
             time.sleep(1 / self.fps)  # wait time
 
     def __iter__(self):
